@@ -1,0 +1,14 @@
+@import '@angular/material/theming';
+
+// Define your custom primary color
+$my-primary: mat-palette($mat-teal, 500);
+
+// Define the other required palettes
+$my-accent: mat-palette($mat-pink, A200, A100, A400);
+$my-warn: mat-palette($mat-red);
+
+// Create the theme
+$my-theme: mat-light-theme($my-primary, $my-accent, $my-warn);
+
+// Apply the theme to Angular Material components
+@include angular-material-theme($my-theme);

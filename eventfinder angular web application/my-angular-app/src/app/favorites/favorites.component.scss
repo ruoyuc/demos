@@ -1,0 +1,31 @@
+#favoriteTable {
+    width: 70%;
+    border-radius: 10px;
+    margin: auto;
+    background-color: white;
+}
+
+
+#NotFound {
+    width: 50%;
+    margin: auto;
+    border-radius: 10px;
+    color: red;
+    text-align: center;
+}
+
+@media only screen and (max-width:500px) {
+    #favoriteTable {
+        margin: auto;
+        width: 95%;
+    }
+
+
+    #NotFound {
+        width: 80%;
+        margin: auto;
+        border-radius: 10px;
+        color: red;
+        text-align: center;
+    }
+}

@@ -1,0 +1,38 @@
+
+
+<div class="card mt-5 mb-5" id="NotFound" *ngIf="allStorageItems.length==0">
+    <h2 class="mt-0 mb-0 "><b>No favorite event to show </b></h2>
+</div>
+
+
+
+
+
+
+
+
+
+<div class="card text-center mt-5 " id="favoriteTable" *ngIf="allStorageItems.length!=0" >
+    <table class="table table-hover table-fixed mb-0" style="background-color: white;">
+        <thead >
+            <th scope="col" style="width:9%">#</th>
+            <th scope="col" style="width:20%">Date</th>
+           
+            <th scope="col" style="width:36%">Event</th>
+            <th scope="col" style="width:21%">Category</th>
+            <th scope="col" style="width:16%">Venue</th>
+            <th scope="col" style="width:15%">Favorite</th>
+        </thead>
+        <tbody >
+            <tr *ngFor="let item of allStorageItems; let i = index">
+                <td scope="row">{{i+1}}</td>
+                <td >{{item.value.Date}}</td>
+              
+                <td>{{item.value.Name}}</td>
+                <td>{{item.value.Genre}}</td>
+                <td>{{item.value.Venue}}</td>
+                <td><button mat-raised-button (click)="removeItem(item.key)"> <mat-icon>delete</mat-icon></button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

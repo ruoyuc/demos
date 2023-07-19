@@ -1,0 +1,312 @@
+
+
+<div class="card mt-5 mb-5" id="NotFound" *ngIf="eventArr.length==0 && eventArr[0]!== 0">
+    <h2 class="mt-0 mb-0 "><b>No results available</b></h2>
+</div>
+
+<div class="card text-center mt-5 " id="eventTable" *ngIf="eventArr.length!=0 && eventArr[0]!== 0 && !disCard">
+    <table class="table table-hover table-striped table-fixed mb-0">
+        <thead white-text>
+            <th scope="col" style="width:9%">Date/Time</th>
+            <th scope="col" style="width:20%">Icon</th>
+            <!-- style="width:10%" -->
+            <th scope="col" style="width:36%">Event</th>
+            <th scope="col" style="width:21%">Genre</th>
+            <th scope="col" style="width:16%">Venue</th>
+        </thead>
+        <tbody white-text>
+            <tr *ngFor="let item of eventArr" (click)="clickEvent(item.Id)">
+                <td scope="row">{{item.Local_date}}<br>{{item.Local_time}}</td>
+                <td><img class=" event-image img-fluid" [src]="item.Icon"></td>
+                <td>{{item.Event}}</td>
+                <td>{{item.Genre}}</td>
+                <td>{{item.Venue}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<div class="card mt-5" id="eventCard" *ngIf="eventArr.length!=0 && eventArr[0]!== 0 && disCard">
+
+    <button class="mt-3 ms-3 " id="back" (click)="Back()">
+        <mat-icon>arrow_back_ios_new</mat-icon>
+        <span style="text-decoration: underline; font-size: large;">Back</span>
+    </button>
+
+    <div class="d-flex align-items-center justify-content-center">
+        <h1 class="text-center mb-3 white-text"><b>{{event.Name}}</b></h1>
+
+        <button mat-icon-button id="favorite" (click)="toggleHeartColor()">
+
+            
+            <mat-icon *ngIf="isRedHeart" id="redheart">favorite</mat-icon>
+            <mat-icon *ngIf="!isRedHeart" id="blackheart">favorite_border</mat-icon>
+        </button>
+    </div>
+
+    
+    <mat-tab-group mat-align-tabs="center" backgroundColor="primary" class="custom-tab-group" mat-stretch-tabs="false">
+        <!-- backgroundColor="accent" -->
+        <mat-tab label="Events">
+            <div id="events" class="row text-center align-top mt-4 mb-5">
+                <div class="col-md-6 col-12">
+                    <div>
+                        <p class="title">Date</p>
+                        <p class="detail">{{event.Date}}</p>
+                    </div>
+
+                    <div>
+                        <p class="title">Artist/Team</p>
+                        <p class="detail">{{event.Artist}}</p>
+                    </div>
+
+                    <div>
+                        <p class="title">Venue</p>
+                        <p class="detail">{{event.Venue}}</p>
+                    </div>
+
+                    <div>
+                        <p class="title">Genres</p>
+                        <p class="detail">{{event.Genre}}</p>
+                    </div>
+
+                    <div>
+                        <p class="title" *ngIf="event.Price!='N/A'">Price Ranges</p>
+                        <p class="detail">{{event.Price}}</p>
+                    </div>
+
+                    <div>
+                        <p class="title">Ticket Status</p>
+                        <div class="tag" style="background-color: green;" *ngIf="event.Status=='onsale'">
+                            On Sale
+                        </div>
+                        <div class="tag" style="background-color: red;" *ngIf="event.Status=='offsale'">
+                            Off Sale
+                        </div>
+                        <div class="tag" style="background-color: black;" *ngIf="event.Status=='canceled'">
+                            Canceled
+                        </div>
+                        <div class="tag" style="background-color: orange;" *ngIf="event.Status=='postponed'">
+                            Postponed
+                        </div>
+                        <div class="tag" style="background-color: orange;" *ngIf="event.Status=='rescheduled'">
+                            Rescheduled
+                        </div>
+                    </div>
+
+                    <div>
+                        <p class="title">Buy Ticket At</p>
+                        <a class="detail" target="_blank" href={{event.Buy}}> TicketMaster </a>
+                    </div>
+
+
+                </div>
+                <div class="col-md-6 col-12">
+                    <div>
+                        <img src={{event.SeatMap}} alt="" id="SeatMap">
+                        <!-- <img src='../../../assets/twitter.png' alt="" id="SeatMap"> -->
+                    </div>
+                </div>
+
+
+                <div class="container d-flex align-items-center justify-content-center mt-4">
+                    <span style="color: white;">Share on:
+                        <a href={{twitter}} target="_blank" class="nounderline">
+                            <img class="icon" src="../../../assets/twitter.png">&nbsp;
+                        </a>
+                        <a href={{facebook}} target="_blank" class="nounderline">
+                            <img class="icon" src="../../../assets/facebook.png">
+                        </a>
+                    </span>
+                </div>
+            </div>
+
+        </mat-tab>
+
+
+        <mat-tab label="Artist&Teams">
+
+
+            <div *ngIf="!event.isMusic" id="NotMusicParent">
+                <div class="card mt-5 mb-5" id="NotMusic">
+                    <h2 class="mt-0 mb-0 "><b>No music related artist details to show</b></h2>
+                </div>
+            </div>
+
+
+
+
+
+
+            <ngb-carousel [interval]="0" *ngIf="event.isMusic">
+
+                <ng-container *ngFor="let slide of artArr">
+                    <ng-template ngbSlide>
+                        <div class="picsum-img-wrapper">
+
+
+                            <div class="row text-center align-top mt-5 "
+                                style="padding-left: 100px; padding-right: 100px;">
+
+                                <div class="col-md-3 col-12">
+                                    <img class="rounded-circle logo ml-10" src={{slide.logo}} alt="Random first slide">
+
+                                    <p class="title mt-3">{{slide.name}}</p>
+                                </div>
+
+                                <div class="col-md-3 col-12 mt-5">
+                                    <p class="title">Popularity</p>
+                                    <!-- <p class="detail">{{'event.Date'}}</p>  -->
+                                    <div class="spinner-container">
+                                        <mat-progress-spinner style="width: 50px;height : 50px" class="example-margin"
+                                            [color]="color" [mode]="mode" [value]="slide.popularity">
+                                        </mat-progress-spinner>
+                                        <span class="spinner-value">{{slide.popularity}}</span>
+                                    </div>
+
+
+                                </div>
+                                <div class="col-md-3 col-12 mt-5">
+                                    <p class="title">Followers</p>
+                                    <p class="detail">{{slide.followers.toLocaleString('en-US')}}</p>
+                                </div>
+                                <div class="col-md-3 col-12 mt-5">
+                                    <p class="title">Spotify Link</p>
+
+                                    <a target="_blank" href={{slide.spotifyLink}}><img class="rounded-circle spotify"
+                                            src="../../../assets/spotify.png" alt="Random first slide"></a>
+                                </div>
+
+                            </div>
+
+
+                            <div class="container d-flex align-items-center justify-content-start mt-4 mb-4"
+                                style="padding-left: 100px; padding-right: 100px; font-size: medium;">
+                                <span style="color: aquamarine;">Album featuring
+                                </span>
+                            </div>
+
+
+
+                            <div class="row  align-top mt-5 mb-5 album-container">
+                                <!-- "https://i.scdn.co/image/ab67616d0000b273f0dd8e557b66318ea8e6978d" -->
+                                <div class="col-md-4 col-12 custom-col mb-2">
+                                    <img class="album" src={{slide.images[0]}} alt='first album'>
+                                </div>
+
+                                <div class="col-md-4 col-12 custom-col  mb-2">
+                                    <img class="album" src={{slide.images[1]}} alt='first album'>
+                                </div>
+
+                                <div class="col-md-4 col-12 custom-col  mb-2">
+                                    <img class="album" src={{slide.images[2]}} alt='first album'>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </ng-template>
+                </ng-container>
+
+
+
+
+
+            </ngb-carousel>
+
+        </mat-tab>
+
+
+        <mat-tab label="Venue">
+            <div id="venue" class="row text-center align-top mt-4">
+                <div class="col-md-6 col-12">
+                    <div>
+                        <p class="title">Name</p>
+                        <p class="detail">{{venue.Name}}</p>
+                    </div>
+                    <div>
+                        <p class="title">Address</p>
+                        <p class="detail">{{venue.Address}}</p>
+                    </div>
+                    <!-- <div *ngIf="venue.Phone!='N/A'"> -->
+                    <div *ngIf="venue.Phone!='N/A'">
+                        <p class="title">Phone Number</p>
+                        <p class="detail">{{venue.Phone}}</p>
+                    </div>
+                </div>
+
+
+                <div class="col-md-6 col-12">
+                    <!-- Open Hours -->
+                    <div *ngIf="venue.Open!='N/A'">
+                        <p class="title">Open Hours</p>
+                        <!-- <p class="detail">{{'venue.Phone'}}</p> -->
+
+                        <div [class.collapsed]="isCollapsed[0]" class="detail">{{ venue.Open }}</div>
+                        <button class="btn mt-1" (click)="toggleCollapse(0)">
+
+                            <span *ngIf="isCollapsed[0]"
+                                style="font-size: medium;text-decoration: underline;color: blue;">Show More</span>
+                            <mat-icon *ngIf="isCollapsed[0]" style="color: white;">expand_more</mat-icon>
+
+                            <span *ngIf="!isCollapsed[0]"
+                                style="font-size: medium;font-size: medium;text-decoration: underline;color: blue;">Show
+                                Less</span>
+                            <mat-icon *ngIf="!isCollapsed[0]" style="color: white;">expand_less</mat-icon>
+                        </button>
+                    </div>
+                    <!-- General Rule -->
+                    <div *ngIf="venue.Grule!='N/A'">
+                        <p class="title">Genre Rule</p>
+                        <!-- <p class="detail">{{'venue.Phone'}}</p> -->
+                        <p [class.collapsed]="isCollapsed[1]" class="detail">{{ venue.Grule }}</p>
+                        <button class="btn mt-1" (click)="toggleCollapse(1)">
+
+                            <span *ngIf="isCollapsed[1]"
+                                style="font-size: medium;text-decoration: underline;color: blue;">Show More</span>
+                            <mat-icon *ngIf="isCollapsed[1]" style="color: white;">expand_more</mat-icon>
+
+                            <span *ngIf="!isCollapsed[1]"
+                                style="font-size: medium;font-size: medium;text-decoration: underline;color: blue;">Show
+                                Less</span>
+                            <mat-icon *ngIf="!isCollapsed[1]" style="color: white;">expand_less</mat-icon>
+                        </button>
+                    </div>
+                    <!-- Child Rule -->
+                    <div *ngIf="venue.Crule!='N/A'">
+                        <p class="title">Child Rule</p>
+                        <!-- <p class="detail">{{'venue.Phone'}}</p> -->
+                        <p [class.collapsed]="isCollapsed[2]" class="detail">{{ venue.Crule }}</p>
+                        <button class="btn mt-1" (click)="toggleCollapse(2)">
+
+                            <span *ngIf="isCollapsed[2]"
+                                style="font-size: medium;text-decoration: underline;color: blue;">Show More</span>
+                            <mat-icon *ngIf="isCollapsed[2]" style="color: white;">expand_more</mat-icon>
+
+                            <span *ngIf="!isCollapsed[2]"
+                                style="font-size: medium;font-size: medium;text-decoration: underline;color: blue;">Show
+                                Less</span>
+                            <mat-icon *ngIf="!isCollapsed[2]" style="color: white;">expand_less</mat-icon>
+                        </button>
+                    </div>
+
+                </div>
+
+
+
+
+            </div>
+
+            <!-- <Button> -->
+
+            <div class="container d-flex align-items-center justify-content-center mt-4">
+                <button mat-raised-button (click)="openDialog()" style="background-color: red; color: white;"> Show
+                    venue on Google map</button>
+            </div>
+
+        </mat-tab>
+    </mat-tab-group>
+
+</div>

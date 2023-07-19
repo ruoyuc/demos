@@ -1,0 +1,247 @@
+@import '../../custom-theme';
+
+
+
+#NotFound {
+    width: 50%;
+    margin: auto;
+    border-radius: 10px;
+    color: red;
+    text-align: center;
+}
+
+
+#NotMusic {
+
+    width: 50%;
+    margin: auto;
+    border-radius: 10px;
+    color: red;
+    text-align: center;
+
+}
+
+#NotMusicParent {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50vh;
+    /* Set the parent element's height to 100% of the viewport height */
+}
+
+#eventTable {
+    width: 70%;
+    border-radius: 10px;
+    margin: auto;
+    background-color: #484848;
+}
+
+#back {
+    background-color: transparent;
+    border: none;
+    width: fit-content;
+    color: #ffffff;
+}
+
+.title {
+    font-size: large;
+    color: aquamarine;
+
+}
+
+.detail {
+    font-size: medium;
+    color: #ffffff;
+
+}
+
+
+.tag {
+    // background-color: green;
+    color: white;
+    padding: 8px 16px;
+    display: inline-block;
+    border-radius: 4px;
+}
+
+
+.event-image {
+    width: 50%;
+    /* adjust the width as needed */
+    height: 50%;
+    /* adjust the height as needed */
+    object-fit: cover;
+    /* this will maintain the aspect ratio of the image */
+}
+
+.white-text {
+    color: #ffffff;
+}
+
+#eventCard {
+    width: 60%;
+    margin: auto;
+    // color: aquamarine;
+    background-color: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(5px);
+}
+
+
+#SeatMap {
+    margin: auto;
+    width: 70%;
+    display: flex;
+    justify-content: center;
+    /* horizontally center */
+    align-items: center;
+    /* vertically center */
+    // height: 100vh;           /* set container height to fill the viewport */
+}
+
+.nounderline {
+    text-decoration: none;
+}
+
+.icon {
+    height: 25px;
+    width: 25px;
+}
+
+
+.collapsed {
+    overflow: hidden;
+    max-width: 100%;
+    line-height: 20px;
+    height: 40px;
+    /* Adjust this value according to your desired height */
+}
+
+
+.logo {
+    width: 160px;
+    height: auto;
+    margin: auto;
+}
+
+.spotify {
+    width: 40px;
+    height: auto;
+}
+
+
+
+.spinner-container {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    // width: 50px;
+    // height: 50px;
+}
+
+
+.spinner-value {
+    position: absolute;
+    font-size: 1rem;
+    /* Adjust the font size as needed */
+    color: white;
+}
+
+#events {
+    height: 615px;
+}
+
+#venue {
+    height: 500px;
+}
+
+.custom-col {
+    text-align: center;
+
+}
+
+
+
+thead {
+    //height: 30px;
+    color: #ffffff;
+}
+
+tbody tr td {
+    //height: 100px;
+    color: #ffffff;
+}
+
+
+.custom-tab-group ::ng-deep .mat-tab-label {
+    background-color: mat-color($my-primary);
+}
+
+.album {
+    width: 80%;
+    height: auto;
+    margin: auto;
+
+}
+
+.album-container {
+    padding-left: 100px;
+    padding-right: 100px;
+}
+
+#favorite {
+    background-color: white;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    outline: none;
+    border: none;
+    overflow: hidden;
+}
+
+.red-heart {
+    color: red;
+}
+
+
+#redheart {
+    color: red;
+
+}
+
+// .blackheart {
+//     color: black;
+
+// }
+
+
+@media only screen and (max-width:500px) {
+    #eventTable {
+        margin: auto;
+        width: 95%;
+    }
+
+    .event-image {
+        width: 80%;
+        /* adjust the width as needed */
+        height: 80%;
+        /* adjust the height as needed */
+        object-fit: cover;
+        /* this will maintain the aspect ratio of the image */
+    }
+
+    #eventCard {
+        width: 95%;
+        margin: auto;
+        // color: aquamarine;
+        background-color: rgba(255, 255, 255, 0.25);
+        backdrop-filter: blur(5px);
+    }
+
+
+
+}
